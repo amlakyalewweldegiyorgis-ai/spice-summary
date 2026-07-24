@@ -1,6 +1,4 @@
-flask==3.1.3
-transformers==5.14.1
-torch
-beautifulsoup4==4.15.0
-requests==2.34.2
-gunicorn==23.0.0
+flask
+requests
+gunicorn
+beautifulsoup4
