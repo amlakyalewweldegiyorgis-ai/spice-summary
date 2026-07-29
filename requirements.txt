@@ -1,4 +1,5 @@
 flask
 requests
+textblob
 gunicorn
 beautifulsoup4
