@@ -35,4 +35,5 @@ def analyze_sentiment(text):
 def generate_conclusion(text):
     summary = summarize(text)
     sentiment = analyze_sentiment(text)
-    return f"Overall sentiment is {sentiment.lower()}. Key points: {summary}"
+    # Return full summary, not truncated
+    return f"Overall sentiment is {sentiment.lower()}. {summary}"
