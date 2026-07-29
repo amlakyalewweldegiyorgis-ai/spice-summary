@@ -7,16 +7,13 @@ def summarize(text):
     sentences = [s.strip() for s in sentences if len(s.strip()) > 20]
     
     if len(sentences) <= 3:
-        return text[:300] + "..."
+        return text  # Return full text if short
     
     # Take first 2 and last 1 sentence as summary
     summary_sentences = sentences[:2] + [sentences[-1]]
     summary = '. '.join(summary_sentences) + '.'
     
-    # Limit length
-    if len(summary) > 500:
-        summary = summary[:500] + "..."
-    
+    # Don't truncate
     return summary
 
 def analyze_sentiment(text):
@@ -35,5 +32,4 @@ def analyze_sentiment(text):
 def generate_conclusion(text):
     summary = summarize(text)
     sentiment = analyze_sentiment(text)
-    # Return full summary, not truncated
     return f"Overall sentiment is {sentiment.lower()}. {summary}"
