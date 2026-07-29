@@ -32,17 +32,15 @@ def generate_conclusion(text):
     summary = summarize(text)
     sentiment = analyze_sentiment(text)
     
-    # Generate a meaningful conclusion based on sentiment and summary
     sentiment_phrases = {
-        "POSITIVE": "This is a positive development",
-        "NEGATIVE": "This raises some concerns",
-        "NEUTRAL": "This presents a balanced view"
+        "POSITIVE": "Overall, this text conveys a positive tone and suggests favorable outcomes.",
+        "NEGATIVE": "The overall tone is negative, highlighting potential issues or concerns.",
+        "NEUTRAL": "The text maintains a neutral perspective, presenting facts without strong bias."
     }
     
-    # Extract key topic (first noun phrase or subject)
-    first_sentence = text.split('.')[0] if '.' in text else text
-    topic = first_sentence[:60] + "..." if len(first_sentence) > 60 else first_sentence
+    # Generate a conclusion that synthesizes key takeaways
+    key_points = summary[:200] + "..." if len(summary) > 200 else summary
     
-    conclusion = f"{sentiment_phrases.get(sentiment, 'Overall')}. The main points are: {summary[:150]}..."
+    conclusion = f"{sentiment_phrases.get(sentiment, 'Overall')} Key takeaways: {key_points}"
     
     return conclusion
