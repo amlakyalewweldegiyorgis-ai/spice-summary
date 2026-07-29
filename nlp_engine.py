@@ -29,18 +29,18 @@ def analyze_sentiment(text):
         return "NEUTRAL"
 
 def generate_conclusion(text):
-    summary = summarize(text)
     sentiment = analyze_sentiment(text)
     
     sentiment_phrases = {
-        "POSITIVE": "Overall, this text conveys a positive tone and suggests favorable outcomes.",
-        "NEGATIVE": "The overall tone is negative, highlighting potential issues or concerns.",
-        "NEUTRAL": "The text maintains a neutral perspective, presenting facts without strong bias."
+        "POSITIVE": "This text expresses a positive outlook with promising developments.",
+        "NEGATIVE": "This text highlights concerns and potential challenges.",
+        "NEUTRAL": "This text presents a balanced, factual overview."
     }
     
-    # Generate a conclusion that synthesizes key takeaways
-    key_points = summary[:200] + "..." if len(summary) > 200 else summary
+    # Extract a brief key point (first sentence only)
+    first_sentence = text.split('.')[0] if '.' in text else text
+    key_point = first_sentence[:100] + "..." if len(first_sentence) > 100 else first_sentence
     
-    conclusion = f"{sentiment_phrases.get(sentiment, 'Overall')} Key takeaways: {key_points}"
+    conclusion = f"{sentiment_phrases.get(sentiment, 'Overall')} Key point: {key_point}"
     
     return conclusion
