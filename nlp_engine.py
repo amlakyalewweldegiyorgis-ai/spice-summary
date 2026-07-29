@@ -7,13 +7,12 @@ def summarize(text):
     sentences = [s.strip() for s in sentences if len(s.strip()) > 20]
     
     if len(sentences) <= 3:
-        return text  # Return full text if short
+        return text
     
     # Take first 2 and last 1 sentence as summary
     summary_sentences = sentences[:2] + [sentences[-1]]
     summary = '. '.join(summary_sentences) + '.'
     
-    # Don't truncate
     return summary
 
 def analyze_sentiment(text):
@@ -32,4 +31,18 @@ def analyze_sentiment(text):
 def generate_conclusion(text):
     summary = summarize(text)
     sentiment = analyze_sentiment(text)
-    return f"Overall sentiment is {sentiment.lower()}. {summary}"
+    
+    # Generate a meaningful conclusion based on sentiment and summary
+    sentiment_phrases = {
+        "POSITIVE": "This is a positive development",
+        "NEGATIVE": "This raises some concerns",
+        "NEUTRAL": "This presents a balanced view"
+    }
+    
+    # Extract key topic (first noun phrase or subject)
+    first_sentence = text.split('.')[0] if '.' in text else text
+    topic = first_sentence[:60] + "..." if len(first_sentence) > 60 else first_sentence
+    
+    conclusion = f"{sentiment_phrases.get(sentiment, 'Overall')}. The main points are: {summary[:150]}..."
+    
+    return conclusion
